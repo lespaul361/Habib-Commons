@@ -7,6 +7,7 @@
     <packaging>jar</packaging>
     <name>commons-commonroutines</name>
     <description>common routines I use in my projects</description>
+    <url>https://github.com/lespaul361/Habib-Commons</url>
     <licenses>
         <license>
             <name>The Apache Software License 2.0</name>
