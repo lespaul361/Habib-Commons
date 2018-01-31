@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.lespaul361</groupId>
     <artifactId>Commons-CommonRoutines</artifactId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.2.2</version>
     <packaging>jar</packaging>
     <name>commons-commonroutines</name>
     <description>common routines I use in my projects</description>

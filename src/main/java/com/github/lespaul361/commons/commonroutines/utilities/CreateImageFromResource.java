@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
  *
  * @author Charles Hamilton
  */
-public class createImageFromResource {
+public class CreateImageFromResource {
 
     /**
      *
@@ -84,7 +84,7 @@ public class createImageFromResource {
             icon = javax.swing.filechooser.FileSystemView.getFileSystemView().getSystemIcon(fl);
 
         } catch (Exception ex) {
-            Logger.getLogger(createImageFromResource.class
+            Logger.getLogger(CreateImageFromResource.class
                     .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {

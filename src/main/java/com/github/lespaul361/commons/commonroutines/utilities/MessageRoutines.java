@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Charles Hamilton
  */
-public class messageroutines {
+public class MessageRoutines {
 
     /**
      * Shows a message box with 1 button that says OK
@@ -22,7 +22,7 @@ public class messageroutines {
      * @param title the title of the message box
      * @param frame the parent frame
      */
-    public static void ShowOkOnly(String message, String title, JFrame frame) {
+    public static void showOkOnly(String message, String title, JFrame frame) {
         Object[] options = {"   OK   "};
         int n = JOptionPane.showOptionDialog(frame,
                 message, title,
@@ -41,7 +41,7 @@ public class messageroutines {
      * @param messageType determines the icon to be shown in the message box
      * @param frame the parent frame 
      */
-    public static void ShowOkOnly(String message, String title, int messageType, JFrame frame) {
+    public static void showOkOnly(String message, String title, int messageType, JFrame frame) {
         Object[] options = {"   OK   "};
         int n = JOptionPane.showOptionDialog(frame,
                 message, title,

@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Charles Hamilton
  */
-public class setCursor {
+public class SetCursor {
 
     private final static MouseAdapter mouseAdapter = new MouseAdapter() {
     };

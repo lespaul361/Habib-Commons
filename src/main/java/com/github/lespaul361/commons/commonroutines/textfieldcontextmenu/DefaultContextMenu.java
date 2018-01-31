@@ -144,7 +144,7 @@ public class DefaultContextMenu extends JPopupMenu {
     }
 
     private void addIcon(String imageName, JMenuItem menu) {
-        Image img = com.github.lespaul361.commons.commonroutines.utilities.createImageFromResource.getImage("/com/habibsweb/commonroutines/TextFieldContextMenu/" + imageName, this.getClass());
+        Image img = com.github.lespaul361.commons.commonroutines.utilities.CreateImageFromResource.getImage("/com/habibsweb/commonroutines/TextFieldContextMenu/" + imageName, this.getClass());
         Image newImg = img.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
         menu.setIcon(new ImageIcon(newImg));
     }
