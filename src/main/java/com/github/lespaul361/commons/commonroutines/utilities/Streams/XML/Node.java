@@ -111,6 +111,23 @@ public class Node {
     }
 
     /**
+     * Gets an <code>Attribute</code> by name in the current <code>Node</code>
+     *
+     * @param name the name of the attribute
+     * @return String with the attribute or <code>null</code> if it is not found
+     */
+    public Attribute getAttribute(String name) {
+        List<Attribute> attributes = getAttributes();
+        for (Attribute attribute : attributes) {
+            if (attribute.getName().equalsIgnoreCase(name)) {
+                return attribute;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Removes an <code>Attribute</code> from this <code>Node</code>
      *
      * @param attribute <code>Attribute</code> to remove
