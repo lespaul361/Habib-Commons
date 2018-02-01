@@ -11,7 +11,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -28,12 +31,15 @@ import java.util.List;
 public class XMLStream {
 
     RootNode root;
-    private final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"{0}\" standalone=\"{1}\"?>";
-    private float version = Float.parseFloat("1.0");
+    protected final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"{0}\" standalone=\"{1}\"?>";
+    protected float version = Float.parseFloat("1.0");
 //completedString = completedString.replaceAll("\n", System.getProperty("line.separator"));
 
     /**
-     * Allowed encoding for XML documents. UTF 8 is the default
+     * Allowed encoding for XML documents. UTF 8 is the default. Not all
+     * encoding and decoding are allowed in Java. Those that are not will be
+     * marked as unsupported at this time. UTF-16 will be used in place of
+     * those.
      */
     public enum StringEncodings {
 
@@ -52,23 +58,29 @@ public class XMLStream {
          */
         UTF_16,
         /**
+         * <p>
          * The Universal Coded Character Set (UCS), is a standard set of
          * characters defined by the International Standard ISO/IEC 10646,
          * Information technology — Universal Coded Character Set (UCS) (plus
          * amendments to that standard), which is the basis of many character
          * encodings. The UCS contains over 128,000 abstract characters, each
          * identified by an unambiguous name and an integer number called its
-         * code point.
+         * code point.</p>
+         * <p>
+         * Unsupported at this time</p>
          */
         ISO_10646_UCS_2,
         /**
+         * <p>
          * The Universal Coded Character Set (UCS), is a standard set of
          * characters defined by the International Standard ISO/IEC 10646,
          * Information technology — Universal Coded Character Set (UCS) (plus
          * amendments to that standard), which is the basis of many character
          * encodings. The UCS contains over 128,000 abstract characters, each
          * identified by an unambiguous name and an integer number called its
-         * code point.
+         * code point.</p>
+         * <p>
+         * Unsupported at this time</p>
          */
         ISO_10646_UCS_4,
         /**
@@ -181,28 +193,28 @@ public class XMLStream {
     /**
      * @return the isStandAlone
      */
-    boolean getIsStandAlone() {
+    public boolean getIsStandAlone() {
         return isStandAlone;
     }
 
     /**
      * @param isStandAlone the isStandAlone to set
      */
-    void setIsStandAlone(boolean isStandAlone) {
+    public void setIsStandAlone(boolean isStandAlone) {
         this.isStandAlone = isStandAlone;
     }
 
     /**
      * @return the encoding
      */
-    StringEncodings getEncoding() {
+    public StringEncodings getEncoding() {
         return encoding;
     }
 
     /**
      * @param encoding the encoding to set
      */
-    void setEncoding(StringEncodings encoding) {
+    public void setEncoding(StringEncodings encoding) {
         this.encoding = encoding;
     }
 
@@ -284,6 +296,31 @@ public class XMLStream {
      */
     public XMLStream(BufferedReader reader) {
         read(reader);
+    }
+
+    /**
+     * Constructs a new <code>XMLStream</code> from as <code>InputStream</code>
+     *
+     * @param in an <code>InputStream</code>
+     * @see InputStream
+     *
+     */
+    public XMLStream(InputStream in) {
+        try {
+            Reader reader = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(reader);
+            read(br);
+        } catch (Exception e) {
+        }
+    }
+
+    public XMLStream(InputStream in, StringEncodings enc) {
+        try {
+            Reader reader = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(reader);
+            read(br);
+        } catch (Exception e) {
+        }
     }
 
     private void read(BufferedReader reader) {
@@ -696,7 +733,7 @@ public class XMLStream {
         encodingString = encodingString.replace("_", "-");
         WriterOutputStream wos = null;
         try {
-            wos = new WriterOutputStream(writer,Charset.defaultCharset());// encodingString);
+            wos = new WriterOutputStream(writer, Charset.defaultCharset());// encodingString);
         } catch (Exception e) {
             try {
                 wos = new WriterOutputStream(writer, "UTF_8");
@@ -826,5 +863,46 @@ public class XMLStream {
      */
     public RootNode getRootNode() {
         return this.root;
+    }
+
+    private String getEncodingToJavaEncodingString(StringEncodings enc) {
+        String tmp = "";
+        switch (enc) {
+            //low marks to high ones
+            case UTF_8:
+            case UTF_16:
+            case ISO_8859_1:
+                tmp = enc.name();
+                tmp.replace("_", "-");
+                return tmp;
+            //loose first score
+            case ISO_8859_2:
+            case ISO_8859_3:
+            case ISO_8859_4:
+            case ISO_8859_5:
+            case ISO_8859_6:
+            case ISO_8859_8:
+                String[] parts = enc.name().split("_");
+                tmp = parts[0];
+                tmp += parts[1];
+                tmp += "_" + parts[2];
+                return tmp;
+
+            //unsupported so return UTF-16
+            case ISO_10646_UCS_2:
+            case ISO_10646_UCS_4:
+            case ISO_8859_7:
+            case ISO_8859_9:
+                return "UTF-16";
+            //No scores
+            case ISO_2022_JP:
+            //other
+            case Shift_JIS:
+                return "SJIS";
+            case EUC_JP:
+                return "EUC_JP";
+
+        }
+        return null;
     }
 }

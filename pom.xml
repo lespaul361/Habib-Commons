@@ -3,11 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.lespaul361</groupId>
     <artifactId>Commons-CommonRoutines</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>commons-commonroutines</name>
     <description>common routines I use in my projects</description>
     <url>https://github.com/lespaul361/Habib-Commons</url>
+    <repositories>
+        <repository>
+            <id>osshr</id>            
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
     <licenses>
         <license>
             <name>The Apache Software License 2.0</name>
@@ -40,6 +46,25 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>mailapi</artifactId>
             <version>1.4.4</version>
+        </dependency>
+        <!-- TESTING DEPENDENCIES -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version>1.0.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
+            <version>1.0.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>1.0.2</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <properties>
