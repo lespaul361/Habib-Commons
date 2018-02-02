@@ -227,6 +227,8 @@ public class Node {
             int pos1 = nextNodeString.indexOf("\\");
             currentNodeString = nextNodeString.substring(0, pos1);
             nextNodeString = nextNodeString.substring(pos1);
+        }else{
+            currentNodeString=nextNodeString;
         }
 
         Node curTmp = this.findFirstChildNode(currentNodeString);
@@ -337,6 +339,7 @@ public class Node {
 
         while (parent != null) {
             ret = parent.getName() + "/" + ret;
+            parent=parent.parentNode;
         }
 
         if (ret.substring(0, 1).equalsIgnoreCase("/")) {
