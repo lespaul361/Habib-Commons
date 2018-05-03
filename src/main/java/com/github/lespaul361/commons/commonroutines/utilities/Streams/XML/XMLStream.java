@@ -232,15 +232,25 @@ public class XMLStream {
 
     /**
      * Constructs a new <code>XMLStream</code> with a root <code>Node</code>
+     * name and string encoding type.
+     *
+     * @param rootNodeName name of the node. "" can be used.
+     * @param encoding the encoding to set
+     */
+    public XMLStream(String rootNodeName, StringEncodings encoding) {
+        this(rootNodeName);
+        this.encoding = encoding;
+    }
+
+    /**
+     * Constructs a new <code>XMLStream</code> with a root <code>Node</code>
      * name and an <code>Attribute</code>
      *
      * @param rootNodeName name of the node. "" can be used.
      * @param attribute the <code>attribute</code> for this <code>Node</code>
      */
     public XMLStream(String rootNodeName, com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.Attribute attribute) {
-        RootNode node = new RootNode();
-        node.setName(rootNodeName);
-        root = node;
+        this(rootNodeName);
         root.addAttribute(attribute);
     }
 
@@ -253,13 +263,10 @@ public class XMLStream {
      * <code>Node</code>
      */
     public XMLStream(String rootNodeName, com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.Attribute[] attributes) {
-        RootNode node = new RootNode();
-        node.setName(rootNodeName);
-        root = node;
+        this(rootNodeName);
         for (com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.Attribute att : attributes) {
             root.addAttribute(att);
         }
-
     }
 
     /**

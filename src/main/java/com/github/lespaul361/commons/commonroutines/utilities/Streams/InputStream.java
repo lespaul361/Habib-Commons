@@ -89,12 +89,7 @@ public class InputStream implements Closeable {
      * @throws NullPointerException if file is null
      */
     public InputStream(File file) throws NullPointerException,Exception {
-        if (file == null) {
-            throw new NullPointerException("File is null");
-        }
-        fileInputStream = new FileInputStream(file);
-        encoding = "UTF8";
-        fileLength = file.length();
+        this(file,"UTF8");
     }
 
     /**
@@ -146,9 +141,7 @@ public class InputStream implements Closeable {
      * @throws Exception any throwable error encountered
      */
     public InputStream(FileInputStream stream) throws Exception {
-        fileInputStream = stream;
-        encoding = "UTF8";
-        fileLength = stream.getChannel().size();
+        this(stream,"UTF8");
     }
 
     /**
