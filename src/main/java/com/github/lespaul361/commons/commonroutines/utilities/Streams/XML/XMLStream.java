@@ -8,20 +8,25 @@ package com.github.lespaul361.commons.commonroutines.utilities.Streams.XML;
 import com.github.lespaul361.commons.commonroutines.utilities.Streams.WriterOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.SortedMap;
 
 /**
  * Stream for reading and writing XML documents
@@ -33,6 +38,7 @@ public class XMLStream {
     RootNode root;
     protected final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"{0}\" standalone=\"{1}\"?>";
     protected float version = Float.parseFloat("1.0");
+    private boolean isChanged = false;
 //completedString = completedString.replaceAll("\n", System.getProperty("line.separator"));
 
     /**
@@ -273,36 +279,15 @@ public class XMLStream {
      * Constructs a new <code>XMLStream</code> from a XML File
      *
      * @param file the <code>File</code> to read
-     * @throws Exception any throwable <code>Exception</code>
+     * @throws java.io.IOException
+     * @see java.io.IOException
+     * @throws
+     * com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.InvalidHeaderException
+     * @see
+     * com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.InvalidHeaderException
      */
-    public XMLStream(File file) throws Exception {
-        String tmp = "";
-        String currentLine = "";
-        String lastLine = "";
-        int pos1 = -1;
-        int pos2 = -1;
-        boolean hasHeader = setUpHeaderFromFile(file);
-        Node parent = null;
-        Node currentNode = null;
-        String nodeName = "";
-        Attribute[] attributes = null;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            read(reader);
-        } catch (Exception ex) {
-            System.out.println(ex.getStackTrace().toString());
-            throw ex;
-        }
-    }
-
-    /**
-     * Constructs a new <code>XMLStream</code> from a
-     * <code>BufferedReader</code>
-     *
-     * @param reader a <code>BufferedReader</code>
-     */
-    public XMLStream(BufferedReader reader) {
-        read(reader);
+    public XMLStream(File file) throws IOException, InvalidHeaderException {
+        this(new FileInputStream(file));
     }
 
     /**
@@ -312,31 +297,66 @@ public class XMLStream {
      * @see InputStream
      *
      */
-    public XMLStream(InputStream in) {
-        try {
-            Reader reader = new InputStreamReader(in);
-            BufferedReader br = new BufferedReader(reader);
-            read(br);
-        } catch (Exception e) {
+    public XMLStream(InputStream in) throws IOException, InvalidHeaderException {
+        final int kb = 1024;
+        byte[] buffer = new byte[kb];
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(kb * kb);//set to 1 megabyte
+        int len;
+        while ((len = in.read(buffer)) > -1) {
+            baos.write(buffer, 0, len);
         }
+        baos.flush();
+        buffer = baos.toByteArray();
+        Charset charset = getCharset(buffer);
+        read(new ByteArrayInputStream(buffer), charset);
     }
 
-    public XMLStream(InputStream in, StringEncodings enc) {
-        try {
-            Reader reader = new InputStreamReader(in);
-            BufferedReader br = new BufferedReader(reader);
-            read(br);
-        } catch (Exception e) {
+    public XMLStream(InputStream in, StringEncodings enc) throws IOException, InvalidHeaderException {
+        Charset charset = getCharsetFromString(enc.toString());
+        read(in, charset);
+    }
+
+    private Charset getCharset(byte[] fileData) {
+        SortedMap<String, Charset> charsets = java.nio.charset.Charset.availableCharsets();
+        Iterator<Entry<String, Charset>> iterator = charsets.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Entry<String, Charset> entry = iterator.next();
+            System.out.println(entry.getKey());
+            ByteArrayInputStream bais = new ByteArrayInputStream(fileData);
+            BufferedReader br = new BufferedReader(new InputStreamReader(bais, entry.getValue()));
+            try {
+                String tmp = br.readLine();
+                if (tmp.toLowerCase().contains("encoding")) {
+                    tmp = tmp.substring(tmp.indexOf("encoding"));
+                    tmp = tmp.substring(tmp.indexOf("\"") + 1);
+                    tmp = tmp.substring(0, tmp.indexOf("\""));
+                    return java.nio.charset.Charset.forName(tmp);
+                }
+            } catch (Exception e) {
+            }
+
         }
+        return null;
+    }
+
+    private void read(InputStream in, Charset charset) throws IOException, InvalidHeaderException {
+        BufferedReader reader = null;
+        InputStreamReader isr = new InputStreamReader(in, charset);
+        reader = new BufferedReader(isr);
+        boolean hasHeader = setUpHeaderFromBufferedReader(reader, charset);
+        if (!hasHeader) {
+            throw new InvalidHeaderException("Header is corrupt");
+        }
+
     }
 
     private void read(BufferedReader reader) {
         String tmp = "";
         String currentLine = "";
         String lastLine = "";
+
         int pos1 = -1;
         int pos2 = -1;
-        boolean hasHeader = setUpHeaderFromBufferedReader(reader);
         reader = new BufferedReader(bsr);
         Node parent = null;
         Node currentNode = null;
@@ -344,7 +364,7 @@ public class XMLStream {
         Attribute[] attributes = null;
 
         try {
-            if (hasHeader) {
+            if (true) {//hasHeader) {
                 reader.readLine();
             }
             for (currentLine = reader.readLine(); currentLine != null; currentLine = reader.readLine()) {
@@ -417,9 +437,20 @@ public class XMLStream {
         }
     }
 
+    private Charset getCharsetFromString(String charsetName) {
+        Charset ret = null;
+        try {
+            ret = java.nio.charset.Charset.forName(charsetName);
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+            ret = null;
+        }
+        return ret;
+    }
+
     private boolean isHeaderTag(String line) {
-        if (line.contains("<") & line.contains(">")) {
-            if (!line.contains("/>") & !line.contains("</")) {
+        if (line.contains("<") && line.contains(">")) {
+            if (!line.contains("/>") && !line.contains("</")) {
                 if (line.indexOf(">") + 1 == line.length()) {
                     return true;
                 }
@@ -495,16 +526,7 @@ public class XMLStream {
 
     }
 
-    private boolean setUpHeaderFromFile(File file) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            return setUpHeaderFromBufferedReader(reader);
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
-            return false;
-        }
-    }
-
-    private boolean setUpHeaderFromBufferedReader(BufferedReader reader) {
+    private boolean setUpHeaderFromBufferedReader(BufferedReader reader, Charset charset) throws InvalidHeaderException {
         String tmp = "";
         String currentLine = "";
         boolean hasHeader = false;
@@ -515,6 +537,12 @@ public class XMLStream {
             writer.write(currentLine);
             writer.newLine();
             currentLine = currentLine.trim();
+            if (currentLine.isEmpty()) {
+                throw new InvalidHeaderException("First line can not be empty");
+            }
+            if (!currentLine.substring(0, 1).equalsIgnoreCase("<")) {
+                throw new InvalidHeaderException("Invalid character in beginning of XML header");
+            }
             while ((tmp = reader.readLine()) != null) {
                 writer.write(tmp);
                 writer.newLine();
