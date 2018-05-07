@@ -294,10 +294,12 @@ public class XMLStream {
      * Constructs a new <code>XMLStream</code> from as <code>InputStream</code>
      *
      * @param in an <code>InputStream</code>
+     * @throws java.io.IOException
+     * @throws com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.InvalidHeaderException
      * @see InputStream
      *
      */
-    public XMLStream(InputStream in) throws IOException, InvalidHeaderException {
+    public XMLStream(InputStream in) throws IOException, InvalidHeaderException, NullPointerException {
         final int kb = 1024;
         byte[] buffer = new byte[kb];
         ByteArrayOutputStream baos = new ByteArrayOutputStream(kb * kb);//set to 1 megabyte
@@ -308,6 +310,9 @@ public class XMLStream {
         baos.flush();
         buffer = baos.toByteArray();
         Charset charset = getCharset(buffer);
+        if (charset == null) {
+            throw new NullPointerException("Charset cannot be found");
+        }
         read(new ByteArrayInputStream(buffer), charset);
     }
 
@@ -543,18 +548,11 @@ public class XMLStream {
             if (!currentLine.substring(0, 1).equalsIgnoreCase("<")) {
                 throw new InvalidHeaderException("Invalid character in beginning of XML header");
             }
-            while ((tmp = reader.readLine()) != null) {
-                writer.write(tmp);
-                writer.newLine();
-            }
-            reader.close();
-            writer.close();
-            bsr = new StringReader(sw.toString());
-            reader = new BufferedReader(bsr);
-            tmp = "";
-
-            if ((currentLine.length() > 1) && (currentLine.substring(0, 2).equalsIgnoreCase("<?"))) {
+            if ((currentLine.length() > 1) && (currentLine.substring(0, 5).equalsIgnoreCase("<?xml"))) {
                 //is header
+                while (!currentLine.contains(">")) {
+                    currentLine = currentLine.concat(" " + reader.readLine());
+                }
                 hasHeader = true;
                 tmp = readAttributeValueFromString(currentLine, "version");
                 if (!tmp.equalsIgnoreCase("")) {
