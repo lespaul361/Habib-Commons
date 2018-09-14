@@ -3,15 +3,15 @@
   <exceptions>
     <exception>
       <name>IllegalArgumentException</name>
-      <text>Thrown to indicate that a method has been passed an illegal or inappropriate argument.</description>
+      <text>Thrown to indicate that a method has been passed an illegal or inappropriate argument.</text>
     </exception>
     <exception>
       <name>Exception</name>
-      <text>Thrown to indicate a general {@link Exception} has happened</description>
+      <text>Thrown to indicate a general {@link Exception} has happened</text>
     </exception>
     <exception>
       <name>IndexOutOfBoundsException</name>
-      <text>Thrown to indicate that an index of some sort (such as to an array, to a string, or to a vector) is out of range.</description>
+      <text>Thrown to indicate that an index of some sort (such as to an array, to a string, or to a vector) is out of range.</text>
     </exception>
     <exception>
       <name>FileNotFoundException</name>
