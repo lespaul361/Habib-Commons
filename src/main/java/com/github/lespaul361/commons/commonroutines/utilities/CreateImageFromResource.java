@@ -15,84 +15,91 @@ import javax.swing.ImageIcon;
 
 /**
  * A helper class for getting images
- *
+ * 
  * @author Charles Hamilton
  */
 public class CreateImageFromResource {
 
     /**
-     *
-     * @param path to resource path
-     * @param description of the resource
-     * @param resourceClass class containing the resource path
+     * 
+     * @param path
+     *            to resource path
+     * @param description
+     *            of the resource
+     * @param resourceClass
+     *            class containing the resource path
      * @return <code>Image</code> in the resource
      */
     public static Image getImage(String path, String description, Class resourceClass) {
-        return createImage(path, description, resourceClass);
+	return createImage(path, description, resourceClass);
     }
 
     /**
      * Gets an image from a resource path
-     *
-     * @param path String to resource path
-     * @param resourceClass class containing the resource path
+     * 
+     * @param path
+     *            String to resource path
+     * @param resourceClass
+     *            class containing the resource path
      * @return <code>Image</code> in the resource
      */
     public static Image getImage(String path, Class resourceClass) {
-        return createImage(path, "", resourceClass);
+	return createImage(path, "", resourceClass);
     }
 
     /**
      * Gets an image from a resource path
-     *
-     * @param path String to resource path
-     * @param description of the resource
-     * @param resourceClass class containing the resource path
+     * 
+     * @param path
+     *            String to resource path
+     * @param description
+     *            of the resource
+     * @param resourceClass
+     *            class containing the resource path
      * @return <code>Image</code> in the resource
      */
     protected static Image createImage(String path, String description, Class resourceClass) {
-        URL imageURL = resourceClass.getResource(path);
+	URL imageURL = resourceClass.getResource(path);
 
-        if (imageURL
-                == null) {
-            System.err.println("Resource not found: " + path);
-            return null;
-        } else {
-            return (new ImageIcon(imageURL, description)).getImage();
-        }
+	if (imageURL == null) {
+	    System.err.println("Resource not found: " + path);
+	    return null;
+	} else {
+	    return (new ImageIcon(imageURL, description)).getImage();
+	}
     }
 
     /**
      * Gets the icon from the file extension
-     *
-     * @param extension the file extension
+     * 
+     * @param extension
+     *            the file extension
      * @return <code>Icon</code> from the extension
      */
     public static Icon getIconFromFileExtension(String extension) {
-        int pos = extension.lastIndexOf(".");
-        Icon icon = null;
-        if (extension.trim().equalsIgnoreCase("")) {
-            return null;
-        }
-        if (pos > -1) {
-            extension = extension.substring(pos + 1);
-        }
-        File fl = new File("tmp." + extension);
+	int pos = extension.lastIndexOf(".");
+	Icon icon = null;
+	if (extension.trim().equalsIgnoreCase("")) {
+	    return null;
+	}
+	if (pos > -1) {
+	    extension = extension.substring(pos + 1);
+	}
+	File fl = new File("tmp." + extension);
 
-        try {
-            fl.createNewFile();
-            icon = javax.swing.filechooser.FileSystemView.getFileSystemView().getSystemIcon(fl);
+	try {
+	    fl.createNewFile();
+	    icon = javax.swing.filechooser.FileSystemView.getFileSystemView().getSystemIcon(fl);
 
-        } catch (Exception ex) {
-            Logger.getLogger(CreateImageFromResource.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
+	} catch (Exception ex) {
+	    Logger.getLogger(CreateImageFromResource.class.getName()).log(Level.SEVERE, null, ex);
+	} finally {
+	    try {
 
-            } catch (Exception e) {
-                fl.delete();
-            }
-        }
-        return icon;
+	    } catch (Exception e) {
+		fl.delete();
+	    }
+	}
+	return icon;
     }
 }

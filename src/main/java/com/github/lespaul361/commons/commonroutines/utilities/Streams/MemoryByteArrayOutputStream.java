@@ -38,7 +38,7 @@ import java.io.OutputStream;
  * StringWriter contained in Java doubles its buffersize everytime the buffer
  * overflows. This is nice with small amounts of data, but awfull for huge
  * buffers.
- *
+ * 
  * @author Thomas Morgner
  */
 public class MemoryByteArrayOutputStream extends OutputStream {
@@ -56,49 +56,53 @@ public class MemoryByteArrayOutputStream extends OutputStream {
      * synchronize on the writer itself.
      */
     public MemoryByteArrayOutputStream() {
-        this(4096, 65536);
+	this(4096, 65536);
     }
 
     /**
      * Create a new character-stream writer whose critical sections will
      * synchronize on the writer itself.
-     *
-     * @param bufferSize the size of the buffer
-     * @param maximumBufferIncrement the maximum the buffer can increase
+     * 
+     * @param bufferSize
+     *            the size of the buffer
+     * @param maximumBufferIncrement
+     *            the maximum the buffer can increase
      */
     public MemoryByteArrayOutputStream(final int bufferSize, final int maximumBufferIncrement) {
-        this.maximumBufferIncrement = maximumBufferIncrement;
-        this.buffer = new byte[bufferSize];
-        this.singleIntArray = new byte[1];
+	this.maximumBufferIncrement = maximumBufferIncrement;
+	this.buffer = new byte[bufferSize];
+	this.singleIntArray = new byte[1];
     }
 
     /**
      * Write a portion of an array of characters.
-     *
-     * @param cbuf Array of characters
-     * @param off Offset from which to start writing characters
-     * @param len Number of characters to write
-     * @throws java.io.IOException If an I/O error occurs
+     * 
+     * @param cbuf
+     *            Array of characters
+     * @param off
+     *            Offset from which to start writing characters
+     * @param len
+     *            Number of characters to write
+     * @throwsjava.io.IOException If an I/O error occurs
      */
-    public synchronized void write(final byte[] cbuf, final int off, final int len)
-            throws IOException {
-        if (len < 0) {
-            throw new IllegalArgumentException();
-        }
-        if (off < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        if (cbuf == null) {
-            throw new NullPointerException();
-        }
-        if ((len + off) > cbuf.length) {
-            throw new IndexOutOfBoundsException();
-        }
+    public synchronized void write(final byte[] cbuf, final int off, final int len) throws IOException {
+	if (len < 0) {
+	    throw new IllegalArgumentException();
+	}
+	if (off < 0) {
+	    throw new IndexOutOfBoundsException();
+	}
+	if (cbuf == null) {
+	    throw new NullPointerException();
+	}
+	if ((len + off) > cbuf.length) {
+	    throw new IndexOutOfBoundsException();
+	}
 
-        ensureSize(cursor + len);
+	ensureSize(cursor + len);
 
-        System.arraycopy(cbuf, off, this.buffer, cursor, len);
-        cursor += len;
+	System.arraycopy(cbuf, off, this.buffer, cursor, len);
+	cursor += len;
     }
 
     /**
@@ -106,13 +110,14 @@ public class MemoryByteArrayOutputStream extends OutputStream {
      * output stream. The general contract for <code>write(b)</code> is that it
      * should have exactly the same effect as the call <code>write(b, 0,
      * b.length)</code>.
-     *
-     * @param b the data.
-     * @throws java.io.IOException if an I/O error occurs.
-     * @see java.io.OutputStream#write(byte[], int, int)
+     * 
+     * @param b
+     *            the data.
+     * @throwsjava.io.IOException if an I/O error occurs. * @see
+     *                            java.io.OutputStream#write(byte[], int, int)
      */
     public void write(final byte[] b) throws IOException {
-        write(b, 0, b.length);
+	write(b, 0, b.length);
     }
 
     /**
@@ -123,28 +128,29 @@ public class MemoryByteArrayOutputStream extends OutputStream {
      * <p>
      * Subclasses of <code>OutputStream</code> must provide an implementation
      * for this method.
-     *
-     * @param b the <code>byte</code>.
-     * @throws java.io.IOException if an I/O error occurs. In particular, an
-     * <code>IOException</code> may be thrown if the output stream has been
-     * closed.
+     * 
+     * @param b
+     *            the <code>byte</code>.
+     * @throwsjava.io.IOException if an I/O error occurs. In particular, an *
+     *                            <code>IOException</code> may be thrown if the
+     *                            output stream has been * closed.
      */
     public synchronized void write(final int b) throws IOException {
-        this.singleIntArray[0] = (byte) (0xFF & b);
-        write(singleIntArray, 0, 1);
+	this.singleIntArray[0] = (byte) (0xFF & b);
+	write(singleIntArray, 0, 1);
     }
 
     private void ensureSize(final int size) {
-        if (this.buffer.length >= size) {
-            return;
-        }
+	if (this.buffer.length >= size) {
+	    return;
+	}
 
-        final int computedSize = (int) Math.min((this.buffer.length + 1) * 1.5, this.buffer.length
-                + maximumBufferIncrement);
-        final int newSize = Math.max(size, computedSize);
-        final byte[] newBuffer = new byte[newSize];
-        System.arraycopy(this.buffer, 0, newBuffer, 0, cursor);
-        this.buffer = newBuffer;
+	final int computedSize = (int) Math.min((this.buffer.length + 1) * 1.5, this.buffer.length
+		+ maximumBufferIncrement);
+	final int newSize = Math.max(size, computedSize);
+	final byte[] newBuffer = new byte[newSize];
+	System.arraycopy(this.buffer, 0, newBuffer, 0, cursor);
+	this.buffer = newBuffer;
     }
 
     /**
@@ -159,55 +165,55 @@ public class MemoryByteArrayOutputStream extends OutputStream {
      * stream guarantees only that bytes previously written to the stream are
      * passed to the operating system for writing; it does not guarantee that
      * they are actually written to a physical device such as a disk drive.
-     *
-     * @throws java.io.IOException If an I/O error occurs
+     * 
+     * @throwsjava.io.IOException If an I/O error occurs
      */
     public void flush() throws IOException {
-        if ((buffer.length - cursor) > 50000) {
-            System.out.println("WASTED: " + (buffer.length - cursor));
-        }
+	if ((buffer.length - cursor) > 50000) {
+	    System.out.println("WASTED: " + (buffer.length - cursor));
+	}
     }
 
     /**
      * Close the stream, flushing it first. Once a stream has been closed,
      * further write() or flush() invocations will cause an IOException to be
      * thrown. Closing a previously-closed stream, however, has no effect.
-     *
-     * @throws java.io.IOException If an I/O error occurs
+     * 
+     * @throwsjava.io.IOException If an I/O error occurs
      */
     public void close() throws IOException {
-        flush();
-        this.buffer = null;
+	flush();
+	this.buffer = null;
     }
 
     /**
      * Gets an array of bytes written
-     *
+     * 
      * @return <code>byte</code>
      */
     public synchronized byte[] toByteArray() {
-        final byte[] retval = new byte[cursor];
-        System.arraycopy(buffer, 0, retval, 0, cursor);
-        return retval;
+	final byte[] retval = new byte[cursor];
+	System.arraycopy(buffer, 0, retval, 0, cursor);
+	return retval;
     }
 
     /**
      * Get the size of the data written
-     *
+     * 
      * @return <code>int</code>
      */
     public int getLength() {
-        return cursor;
+	return cursor;
     }
 
     /**
-     *
+     * 
      * @return array of <code>byte</code>
      */
     public byte[] getRaw() {
-        if ((buffer.length - cursor) > 50000) {
-            System.out.println("WASTED: " + (buffer.length - cursor) + " Length: " + buffer.length);
-        }
-        return buffer;
+	if ((buffer.length - cursor) > 50000) {
+	    System.out.println("WASTED: " + (buffer.length - cursor) + " Length: " + buffer.length);
+	}
+	return buffer;
     }
 }

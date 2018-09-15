@@ -7,7 +7,7 @@ package com.github.lespaul361.commons.commonroutines.utilities.Streams.XML;
 
 /**
  * The <code>RootNode</code> or top level <code>Node</code>
- *
+ * 
  * @author Charles Hamilton
  */
 public class RootNode extends Node {
@@ -15,10 +15,10 @@ public class RootNode extends Node {
     private int lastNodeID = -1;
 
     void setLastNodeID(int lastNodeID) {
-        this.lastNodeID = lastNodeID;
+	this.lastNodeID = lastNodeID;
     }
 
     int getLastNodeID() {
-        return lastNodeID;
+	return lastNodeID;
     }
 }

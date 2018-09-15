@@ -74,18 +74,13 @@
     </properties>
     <build>
         <plugins>
+            <!--
             <plugin>
                 <groupId>com.github.lespaul361</groupId>
                 <artifactId>JavadocPlugIn-maven-plugin</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <configuration>
                     <configurationFile>${project.basedir}\src\main\resources\JavaFillInConfig.xml</configurationFile>               
-                    <fillers>
-                        <filler>
-                            <variable>$test</variable>
-                            <text>this is a test</text>
-                        </filler>
-                    </fillers>
                     <exceptions>
                         <exception>
                             <name>InvalidHeaderException</name>
@@ -101,6 +96,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
             <plugin><!-- mvn java-formatter:format -->
                 <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
                 <artifactId>maven-java-formatter-plugin</artifactId>

@@ -279,9 +279,7 @@ public class XMLStream {
      * Constructs a new <code>XMLStream</code> from a XML File
      *
      * @param file the <code>File</code> to read
-     * @throws IOException
-     * @throws InvalidHeaderException
-      */
+     * @throwsIOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.     * @throwsInvalidHeaderException Exception thrown when the XML file header is not as expected or incorrect      */
     public XMLStream(File file) throws IOException, InvalidHeaderException {
         this(new FileInputStream(file));
     }
@@ -290,12 +288,12 @@ public class XMLStream {
      * Constructs a new <code>XMLStream</code> from as <code>InputStream</code>
      *
      * @param in an <code>InputStream</code>
-     * @throws IOException
-     * @throws InvalidHeaderException
-     * @throws NullPointerException
+     * @throwsIOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.     * @throwsInvalidHeaderException Exception thrown when the XML file header is not as expected or incorrect     * @throws NullPointerException
      * @see InputStream
      *
      */
+
+
     public XMLStream(InputStream in) throws IOException, InvalidHeaderException, NullPointerException {
         final int kb = 1024;
         byte[] buffer = new byte[kb];

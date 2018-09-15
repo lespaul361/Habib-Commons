@@ -13,45 +13,46 @@ import java.io.ObjectOutputStream;
 
 /**
  * A simple class with generic serialize and deserialize method implementations
- *
+ * 
  * @author pankaj
- *
+ * 
  */
 public class SerializationUtil {
 
     // deserialize to Object from given file
     /**
      * Opens a serialized object
-     *
-     * @param fileName the full path to the serialized object
+     * 
+     * @param fileName
+     *            the full path to the serialized object
      * @return <code>Object</code> that is the serialized object
-     * @throws IOException an error reading the file
-     * @throws ClassNotFoundException class reading error
+     * @throwsIOException an error reading the file * @throwsClassNotFoundException
+     *                    class reading error
      */
-    public static Object deserialize(String fileName) throws IOException,
-            ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(fileName);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Object obj = ois.readObject();
-        ois.close();
-        return obj;
+    public static Object deserialize(String fileName) throws IOException, ClassNotFoundException {
+	FileInputStream fis = new FileInputStream(fileName);
+	ObjectInputStream ois = new ObjectInputStream(fis);
+	Object obj = ois.readObject();
+	ois.close();
+	return obj;
     }
 
     // serialize the given object and save it to file
     /**
      * Saves an object to a file
-     *
-     * @param obj the object to be saved
-     * @param fileName the full path of the file to save the information in
-     * @throws IOException an error writing the file
+     * 
+     * @param obj
+     *            the object to be saved
+     * @param fileName
+     *            the full path of the file to save the information in
+     * @throwsIOException an error writing the file
      */
-    public static void serialize(Object obj, String fileName)
-            throws IOException {
-        FileOutputStream fos = new FileOutputStream(fileName);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(obj);
+    public static void serialize(Object obj, String fileName) throws IOException {
+	FileOutputStream fos = new FileOutputStream(fileName);
+	ObjectOutputStream oos = new ObjectOutputStream(fos);
+	oos.writeObject(obj);
 
-        fos.close();
+	fos.close();
     }
 
 }

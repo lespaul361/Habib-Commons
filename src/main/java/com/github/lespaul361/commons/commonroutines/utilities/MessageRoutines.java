@@ -10,45 +10,42 @@ import javax.swing.JOptionPane;
 
 /**
  * Helper class for simple message routines
- *
+ * 
  * @author Charles Hamilton
  */
 public class MessageRoutines {
 
     /**
      * Shows a message box with 1 button that says OK
-     *
-     * @param message the message to show the user
-     * @param title the title of the message box
-     * @param frame the parent frame
+     * 
+     * @param message
+     *            the message to show the user
+     * @param title
+     *            the title of the message box
+     * @param frame
+     *            the parent frame
      */
     public static void showOkOnly(String message, String title, JFrame frame) {
-        Object[] options = {"   OK   "};
-        int n = JOptionPane.showOptionDialog(frame,
-                message, title,
-                JOptionPane.PLAIN_MESSAGE,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]);
+	Object[] options = { "   OK   " };
+	int n = JOptionPane.showOptionDialog(frame, message, title, JOptionPane.PLAIN_MESSAGE,
+		JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
     }
 
     /**
      * Shows a message box with 1 button that says OK
-     *
-     * @param message the message to show the user
-     * @param title the title of the message box
-     * @param messageType determines the icon to be shown in the message box
-     * @param frame the parent frame 
+     * 
+     * @param message
+     *            the message to show the user
+     * @param title
+     *            the title of the message box
+     * @param messageType
+     *            determines the icon to be shown in the message box
+     * @param frame
+     *            the parent frame
      */
     public static void showOkOnly(String message, String title, int messageType, JFrame frame) {
-        Object[] options = {"   OK   "};
-        int n = JOptionPane.showOptionDialog(frame,
-                message, title,
-                JOptionPane.PLAIN_MESSAGE,
-                messageType,
-                null,
-                options,
-                options[0]);
+	Object[] options = { "   OK   " };
+	int n = JOptionPane.showOptionDialog(frame, message, title, JOptionPane.PLAIN_MESSAGE, messageType, null,
+		options, options[0]);
     }
 }
