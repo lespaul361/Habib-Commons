@@ -85,21 +85,23 @@ public class InputStream implements Closeable {
      * 8
      *
      * @param file file to write to
-     * @throws Exception for other errors
-     * @throws NullPointerException if file is null
+     * @throwsException for other errors
+     * @throwsNullPointerException if file is null
      */
-    public InputStream(File file) throws NullPointerException,Exception {
-        this(file,"UTF8");
+    public InputStream(File file) throws NullPointerException, Exception {
+        this(file, "UTF8");
     }
 
     /**
-     * Constructs a new <code>InputStream</code> with the specified encoding
+     * * Constructs a new <code>InputStream</code> with the specified encoding
      *
-     * @param file file to read from
-     * @param charsetName Encoding name
-     * @throws Exception any throwable error encountered
+     *
+     * * @param file file to read from * @param charsetName Encoding name
+     *
+     * @throwsException any throwable error encountered
      */
-    public InputStream(File file, String charsetName) throws Exception {
+    public InputStream(File file, String charsetName)
+            throws Exception {
         if (file == null) {
             throw new NullPointerException("File is null");
         }
@@ -109,11 +111,11 @@ public class InputStream implements Closeable {
     }
 
     /**
-     * Constructs a new <code>InputStream</code> with the specified encoding
+     * * Constructs a new <code>InputStream</code> with the specified encoding
      *
-     * @param stream <code>FileInputStream</code> to read from
-     * @param charsetName name of the character set to use
-     * @throws Exception
+     *
+     * * @param stream <code>FileInputStream</code> to read from * @param
+     * charsetName name of the character set to use * @throws Exception
      * <p>
      * <strong>Character Set Names</strong><br>
      * US-ASCII - Seven-bit ASCII, a.k.a. ISO646-US, a.k.a. the Basic Latin
@@ -138,41 +140,39 @@ public class InputStream implements Closeable {
      * 8
      *
      * @param stream <code>FileInputStream</code> to read from
-     * @throws Exception any throwable error encountered
+     * @throwsException any throwable error encountered
      */
-    public InputStream(FileInputStream stream) throws Exception {
-        this(stream,"UTF8");
+    public InputStream(FileInputStream stream)
+            throws Exception {
+        this(stream, "UTF8");
     }
 
     /**
-     * Reads a string from the stream
-     *
-     * @param length the amount of bytes to read
-     * @return <code>String</code>
-     * @throws IOException for reading error
+     * * Reads a string from the stream * * @param length the amount of bytes
+     * to read * @return <code>String</code> * @)throws IOException for reading
+     * error
      */
     public String readString(int length) throws IOException {
         return new String(readBytes(length), encoding);
     }
 
     /**
-     * Gets the next byte
-     *
-     * @return <code>byte</code>
-     * @throws IOException for reading error
+     * * Gets the next byte * * @return <code>byte</code> * @)throws
+     * IOException for reading error
      */
     public byte readByte() throws IOException {
         return readBytes(1)[0];
     }
 
     /**
-     * Gets an array of bytes
+     * * Gets an array of bytes * * @param length the amount of bytes to read
      *
-     * @param length the amount of bytes to read
-     * @return array of <code>byte</code>
-     * @throws IOException for reading error
+     *
+     * @return array of <code>byte</code> * @)throws IOException for reading
+     * error
      */
-    public byte[] readBytes(int length) throws IOException {
+    public byte[] readBytes(int length)
+            throws IOException {
         byte[] buffer = new byte[length];
         int ret = fileInputStream.read(buffer);
         if (ret == -1) {
@@ -183,148 +183,144 @@ public class InputStream implements Closeable {
     }
 
     /**
-     * reads the next character
+     * * reads the next character * * @return <code>char</code>
      *
-     * @return <code>char</code>
-     * @throws IOException for reading error
+     *
+     * @)throws IOException for reading error
      */
     public char readChar() throws IOException {
         return readChars(1)[0];
     }
 
     /**
-     * reads an array of characters
-     *
-     * @param len number of characters to read
-     * @return array of <code>char</code>
-     * @throws IOException for reading error
+     * * reads an array of characters * * @param len number of characters to
+     * read * @return array of <code>char</code> * @)throws IOException for
+     * reading error
      */
     public char[] readChars(int len) throws IOException {
         return readString(len).toCharArray();
     }
 
     /**
-     * reads an integer
-     *
-     * @return <code>int</code>
-     * @throws IOException for reading error
+     * * reads an integer * * @return <code>int</code> * @)throws IOException
+     * for reading error
      */
     public int readInt() throws IOException {
         return readInt(0);
     }
 
     /**
-     * reads an integer at a specified offset
+     * * reads an integer at a specified offset * * @param offset the start
+     * offset in the file to start reading * @return <code>int</code>
      *
-     * @param offset the start offset in the file to start reading
-     * @return <code>int</code>
-     * @throws IOException for reading error
+     *
+     * @)throws IOException for reading error
      */
-    public int readInt(int offset) throws IOException {
+    public int readInt(int offset
+    ) throws IOException {
         byte[] buffer = new byte[4];
         fileInputStream.read(buffer, offset, 4);
         return (int) getByteArrayToInt(buffer);
     }
 
     /**
-     * reads a <code>Short</code> at a specified offset
-     *
-     * @return <code>short</code>
-     * @throws IOException for reading error
+     * * reads a <code>Short</code> at a specified offset * * @return
+     * <code>short</code> * @)throws IOException for reading error
      */
     public short readShort() throws IOException {
         return readShort(0);
     }
 
     /**
-     * reads a <code>Short</code> at a specified offset
+     * * reads a <code>Short</code> at a specified offset * * @param offset the
+     * start offset in the file to start reading * @return <code>short</code>
      *
-     * @param offset the start offset in the file to start reading
-     * @return <code>short</code>
-     * @throws IOException for reading error
+     *
+     * @)throws IOException for reading error
      */
-    public short readShort(int offset) throws IOException {
+    public short readShort(int offset
+    ) throws IOException {
         byte[] buffer = new byte[2];
         fileInputStream.read(buffer, offset, 2);
         return (short) getByteArrayToInt(buffer);
     }
 
     /**
-     * reads a <code>long</code> at a specified offset
-     *
-     * @return <code>long</code>
-     * @throws IOException for reading error
+     * * reads a <code>long</code> at a specified offset * * @return
+     * <code>long</code> * @)throws IOException for reading error
      */
     public long readLong() throws IOException {
         return readLong(0);
     }
 
     /**
-     * reads a <code>long</code> at a specified offset
+     * * reads a <code>long</code> at a specified offset * * @param offset the
+     * start offset in the file to start reading * @return <code>long</code>
      *
-     * @param offset the start offset in the file to start reading
-     * @return <code>long</code>
-     * @throws IOException for reading error
+     *
+     * @)throws IOException for reading error
      */
-    public long readLong(int offset) throws IOException {
+    public long readLong(int offset
+    ) throws IOException {
         byte[] buffer = new byte[8];
         fileInputStream.read(buffer, offset, 8);
         return (long) getByteArrayToInt(buffer);
     }
 
     /**
-     * reads a <code>double</code> at a specified offset
-     *
-     * @return <code>double</code>
-     * @throws IOException for reading error
-     */ 
+     * * reads a <code>double</code> at a specified offset * * @return
+     * <code>double</code> * @)throws IOException for reading error
+     */
     public double readDouble() throws IOException {
         return readDouble(0);
     }
 
     /**
-     * reads a <code>double</code> at a specified offset
+     * * reads a <code>double</code> at a specified offset * * @param offset
+     * the start offset in the file to start reading * @return
+     * <code>double</code>
      *
-     * @param offset the start offset in the file to start reading
-     * @return <code>double</code>
-     * @throws IOException for reading error
+     *
+     * @)throws IOException for reading error
      */
-    public double readDouble(int offset) throws IOException {
+    public double readDouble(int offset
+    ) throws IOException {
         byte[] buffer = new byte[8];
         fileInputStream.read(buffer, offset, 8);
         return (double) getByteArrayToDouble(buffer);
     }
 
     /**
-     * reads a <code>float</code> at a specified offset
-     *
-     * @return <code>float</code>
-     * @throws IOException for reading error
+     * * reads a <code>float</code> at a specified offset * * @return
+     * <code>float</code> * @)throws IOException for reading error
      */
     public float readFloat() throws IOException {
         return readFloat(0);
     }
 
     /**
-     * reads a <code>double</code> at a specified offset
+     * * reads a <code>double</code> at a specified offset * * @param offset
+     * the start offset in the file to start reading * @return
+     * <code>float</code>
      *
-     * @param offset the start offset in the file to start reading
-     * @return <code>float</code>
-     * @throws IOException for reading error
+     *
+     * @)throws IOException for reading error
      */
-    public float readFloat(int offset) throws IOException {
+    public float readFloat(int offset
+    ) throws IOException {
         byte[] buffer = new byte[4];
         fileInputStream.read(buffer, offset, 4);
         return (float) getByteArrayToDouble(buffer);
     }
 
     /**
-     * Skips a section of the file
+     * * Skips a section of the file * * @param offset how far to skip
      *
-     * @param offset how far to skip
-     * @throws IOException for reading error
+     *
+     * @)throws IOException for reading error
      */
-    public void skip(long offset) throws IOException {
+    public void skip(long offset
+    ) throws IOException {
         fileInputStream.skip(offset);
         currentPos = currentPos + offset;
     }
@@ -349,7 +345,8 @@ public class InputStream implements Closeable {
         }
     }
 
-    private float getByteArrayTofloat(byte[] buffer) throws NumberFormatException {
+    private float getByteArrayTofloat(byte[] buffer)
+            throws NumberFormatException {
         if (this.endian == ENDIAN.LITTLE_ENDIAN) {
             ArrayUtils.reverse(buffer);
         }
@@ -363,7 +360,8 @@ public class InputStream implements Closeable {
         }
     }
 
-    private double getByteArrayToDouble(byte[] buffer) throws NumberFormatException {
+    private double getByteArrayToDouble(byte[] buffer)
+            throws NumberFormatException {
         if (this.endian == ENDIAN.LITTLE_ENDIAN) {
             ArrayUtils.reverse(buffer);
         }
@@ -378,7 +376,7 @@ public class InputStream implements Closeable {
     }
 
     /**
-     * @return the fileLength
+     * * @return the fileLength
      */
     public long getFileLength() {
         return fileLength;
