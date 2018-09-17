@@ -98,76 +98,78 @@ public class XMLStream {
          */
         ISO_8859_1,
         /**
-         * ISO/IEC 8859-2:1999, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 2: Latin alphabet No. 2, is part of the
-         * ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1987. It is informally referred to as
-         * "Latin-2".
+         * ISO/IEC 8859-2:1999, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 2: Latin alphabet No. 2, is part
+         * of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1987. It is informally referred
+         * to as "Latin-2".
          */
         ISO_8859_2,
         /**
-         * ISO/IEC 8859-3:1999, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 3: Latin alphabet No. 3, is part of the
-         * ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1988. It is informally referred to as
-         * Latin-3 or South European.
+         * ISO/IEC 8859-3:1999, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 3: Latin alphabet No. 3, is part
+         * of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1988. It is informally referred
+         * to as Latin-3 or South European.
          */
         ISO_8859_3,
         /**
-         * ISO/IEC 8859-4:1998, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 4: Latin alphabet No. 4, is part of the
-         * ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1988. It is informally referred to as
-         * Latin-4 or North European.
+         * ISO/IEC 8859-4:1998, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 4: Latin alphabet No. 4, is part
+         * of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1988. It is informally referred
+         * to as Latin-4 or North European.
          */
         ISO_8859_4,
         /**
-         * ISO/IEC 8859-5:1999, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 5: Latin/Cyrillic alphabet, is part of
-         * the ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1988. It is informally referred to as
-         * Latin/Cyrillic. It was designed to cover languages using a Cyrillic
-         * alphabet such as Bulgarian, Belarusian, Russian, Serbian and
+         * ISO/IEC 8859-5:1999, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 5: Latin/Cyrillic alphabet, is
+         * part of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1988. It is informally referred
+         * to as Latin/Cyrillic. It was designed to cover languages using a
+         * Cyrillic alphabet such as Bulgarian, Belarusian, Russian, Serbian and
          * Macedonian but was never widely used.
          */
         ISO_8859_5,
         /**
-         * ISO/IEC 8859-6:1999, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 6: Latin/Arabic alphabet, is part of
-         * the ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1987. It is informally referred to as
-         * Latin/Arabic. It was designed to cover languages using the Arabic
-         * alphabet (though it does not include the extra letters needed to
-         * write most Arabic-script languages other than Arabic itself, such as
-         * Persian, Urdu, etc.).
+         * ISO/IEC 8859-6:1999, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 6: Latin/Arabic alphabet, is
+         * part of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1987. It is informally referred
+         * to as Latin/Arabic. It was designed to cover languages using the
+         * Arabic alphabet (though it does not include the extra letters needed
+         * to write most Arabic-script languages other than Arabic itself, such
+         * as Persian, Urdu, etc.).
          */
         ISO_8859_6,
         /**
-         * ISO/IEC 8859-7:2003, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 7: Latin/Greek alphabet, is part of the
-         * ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1987. It is informally referred to as
-         * Latin/Greek. It was designed to cover the modern Greek language.
+         * ISO/IEC 8859-7:2003, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 7: Latin/Greek alphabet, is part
+         * of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1987. It is informally referred
+         * to as Latin/Greek. It was designed to cover the modern Greek
+         * language.
          */
         ISO_8859_7,
         /**
-         * ISO/IEC 8859-8:1999, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 8: Latin/Hebrew alphabet, is part of
-         * the ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1987. It is informally referred to as
-         * Latin/Hebrew. ISO/IEC 8859-8 covers all the Hebrew letters, but no
-         * Hebrew vowel signs.
+         * ISO/IEC 8859-8:1999, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 8: Latin/Hebrew alphabet, is
+         * part of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1987. It is informally referred
+         * to as Latin/Hebrew. ISO/IEC 8859-8 covers all the Hebrew letters, but
+         * no Hebrew vowel signs.
          */
         ISO_8859_8,
         /**
-         * ISO/IEC 8859-9:1999, Information technology -- 8-bit single-byte coded
-         * graphic character sets -- Part 9: Latin alphabet No. 5, is part of the
-         * ISO/IEC 8859 series of ASCII-based standard character encodings,
-         * first edition published in 1989. It is informally referred to as
-         * Latin-5 or Turkish. It was designed to cover the Turkish language,
-         * designed as being of more use than the ISO/IEC 8859-3 encoding. It is
-         * identical to ISO/IEC 8859-1 except for these six replacements of
-         * Icelandic characters with characters unique to the Turkish alphabet
+         * ISO/IEC 8859-9:1999, Information technology -- 8-bit single-byte
+         * coded graphic character sets -- Part 9: Latin alphabet No. 5, is part
+         * of the ISO/IEC 8859 series of ASCII-based standard character
+         * encodings, first edition published in 1989. It is informally referred
+         * to as Latin-5 or Turkish. It was designed to cover the Turkish
+         * language, designed as being of more use than the ISO/IEC 8859-3
+         * encoding. It is identical to ISO/IEC 8859-1 except for these six
+         * replacements of Icelandic characters with characters unique to the
+         * Turkish alphabet
          */
         ISO_8859_9,
         /**
@@ -281,7 +283,7 @@ public class XMLStream {
      * @param file the <code>File</code> to read
      * @throws IOException
      * @throws InvalidHeaderException
-      */
+     */
     public XMLStream(File file) throws IOException, InvalidHeaderException {
         this(new FileInputStream(file));
     }

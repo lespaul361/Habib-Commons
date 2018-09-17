@@ -88,8 +88,8 @@ public class InputStream implements Closeable {
      * @throws Exception for other errors
      * @throws NullPointerException if file is null
      */
-    public InputStream(File file) throws NullPointerException,Exception {
-        this(file,"UTF8");
+    public InputStream(File file) throws NullPointerException, Exception {
+        this(file, "UTF8");
     }
 
     /**
@@ -141,7 +141,7 @@ public class InputStream implements Closeable {
      * @throws Exception any throwable error encountered
      */
     public InputStream(FileInputStream stream) throws Exception {
-        this(stream,"UTF8");
+        this(stream, "UTF8");
     }
 
     /**
@@ -277,7 +277,7 @@ public class InputStream implements Closeable {
      *
      * @return <code>double</code>
      * @throws IOException for reading error
-     */ 
+     */
     public double readDouble() throws IOException {
         return readDouble(0);
     }

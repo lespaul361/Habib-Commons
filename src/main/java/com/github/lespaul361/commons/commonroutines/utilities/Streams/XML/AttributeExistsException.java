@@ -16,7 +16,8 @@ public class AttributeExistsException extends Exception {
     private final String attributeName;
 
     /**
-     * Constructs a new <code>AttributeExistsException</code> 
+     * Constructs a new <code>AttributeExistsException</code>
+     *
      * @param attributeName the name of the existing attribute
      */
     public AttributeExistsException(String attributeName) {

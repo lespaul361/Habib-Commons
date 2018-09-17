@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -140,9 +140,9 @@ public class WriterOutputStream extends OutputStream {
     public WriterOutputStream(final Writer writer, final Charset charset, final int bufferSize, final boolean writeImmediately) {
         this(writer,
                 charset.newDecoder()
-                .onMalformedInput(CodingErrorAction.REPLACE)
-                .onUnmappableCharacter(CodingErrorAction.REPLACE)
-                .replaceWith("?"),
+                        .onMalformedInput(CodingErrorAction.REPLACE)
+                        .onUnmappableCharacter(CodingErrorAction.REPLACE)
+                        .replaceWith("?"),
                 bufferSize,
                 writeImmediately);
     }
@@ -207,7 +207,8 @@ public class WriterOutputStream extends OutputStream {
      * @param b the byte array containing the bytes to write
      * @param off the start offset in the byte array
      * @param len the number of bytes to write
-     * @throwsIOException if an I/O error occurs     */
+     * @throws java.io.IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     */
     @Override
     public void write(final byte[] b, int off, int len) throws IOException {
         while (len > 0) {
@@ -226,7 +227,8 @@ public class WriterOutputStream extends OutputStream {
      * Write bytes from the specified byte array to the stream.
      *
      * @param b the byte array containing the bytes to write
-     * @throwsIOException if an I/O error occurs     */
+     * @throwsIOException if an I/O error occurs
+     */
     @Override
     public void write(final byte[] b) throws IOException {
         write(b, 0, b.length);
@@ -236,7 +238,8 @@ public class WriterOutputStream extends OutputStream {
      * Write a single byte to the stream.
      *
      * @param b the byte to write
-     * @throwsIOException if an I/O error occurs     */
+     * @throwsIOException if an I/O error occurs
+     */
     @Override
     public void write(final int b) throws IOException {
         write(new byte[]{(byte) b}, 0, 1);
@@ -247,7 +250,8 @@ public class WriterOutputStream extends OutputStream {
      * will be written to the underlying {@link Writer}. After that
      * {@link Writer#flush()} will be called.
      *
-     * @throwsIOException if an I/O error occurs     */
+     * @throwsIOException if an I/O error occurs
+     */
     @Override
     public void flush() throws IOException {
         flushOutput();
@@ -259,7 +263,8 @@ public class WriterOutputStream extends OutputStream {
      * will be written to the underlying {@link Writer}. After that
      * {@link Writer#close()} will be called.
      *
-     * @throwsIOException if an I/O error occurs     */
+     * @throwsIOException if an I/O error occurs
+     */
     @Override
     public void close() throws IOException {
         processInput(true);
@@ -271,7 +276,8 @@ public class WriterOutputStream extends OutputStream {
      * Decode the contents of the input ByteBuffer into a CharBuffer.
      *
      * @param endOfInput indicates end of input
-     * @throwsIOException if an I/O error occurs     */
+     * @throwsIOException if an I/O error occurs
+     */
     private void processInput(final boolean endOfInput) throws IOException {
         // Prepare decoderIn for reading
         decoderIn.flip();
@@ -295,7 +301,8 @@ public class WriterOutputStream extends OutputStream {
     /**
      * Flush the output.
      *
-     * @throwsIOException if an I/O error occurs     */
+     * @throwsIOException if an I/O error occurs
+     */
     private void flushOutput() throws IOException {
         if (decoderOut.position() > 0) {
             writer.write(decoderOut.array(), 0, decoderOut.position());

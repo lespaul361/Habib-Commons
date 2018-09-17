@@ -9,38 +9,33 @@ import java.util.prefs.Preferences;
 
 /**
  * Helper class to store and retrieve saved settings
- * 
+ *
  * @author David
  */
 public class SaveSettings {
 
     /**
      * Saves a setting
-     * 
-     * @param rootNodeName
-     *            path of the setting
-     * @param nodeName
-     *            name of the setting
-     * @param nodeValue
-     *            value of the setting
+     *
+     * @param rootNodeName path of the setting
+     * @param nodeName name of the setting
+     * @param nodeValue value of the setting
      */
     public static void saveSetting(String rootNodeName, String nodeName, String nodeValue) {
-	Preferences prefs = Preferences.userRoot().node(rootNodeName);
-	prefs.put(nodeName, nodeValue);
+        Preferences prefs = Preferences.userRoot().node(rootNodeName);
+        prefs.put(nodeName, nodeValue);
     }
 
     /**
      * Gets a saved setting
-     * 
-     * @param rootNodeName
-     *            the path of the setting
-     * @param nodeName
-     *            the name of the setting
+     *
+     * @param rootNodeName the path of the setting
+     * @param nodeName the name of the setting
      * @return the value of the setting
      */
     public static String getSetting(String rootNodeName, String nodeName) {
-	Preferences prefs = Preferences.userRoot().node(rootNodeName);
-	String ret = prefs.get(nodeName, "");
-	return ret;
+        Preferences prefs = Preferences.userRoot().node(rootNodeName);
+        String ret = prefs.get(nodeName, "");
+        return ret;
     }
 }

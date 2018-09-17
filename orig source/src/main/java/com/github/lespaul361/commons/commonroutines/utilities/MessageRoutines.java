@@ -39,7 +39,7 @@ public class MessageRoutines {
      * @param message the message to show the user
      * @param title the title of the message box
      * @param messageType determines the icon to be shown in the message box
-     * @param frame the parent frame 
+     * @param frame the parent frame
      */
     public static void showOkOnly(String message, String title, int messageType, JFrame frame) {
         Object[] options = {"   OK   "};

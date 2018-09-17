@@ -34,7 +34,7 @@ public class CompressionUtilities {
             deflater.finish();
             byte[] buffer = new byte[1024];
             while (!deflater.finished()) {
-                int count = deflater.deflate(buffer); // returns the generated code... index  
+                int count = deflater.deflate(buffer); // returns the generated code... index
                 outputStream.write(buffer, 0, count);
             }
             byte[] output = outputStream.toByteArray();
@@ -76,8 +76,8 @@ public class CompressionUtilities {
         }
         return null;
     }
-    
-    public static byte [] inflateStream(byte [] data){
+
+    public static byte[] inflateStream(byte[] data) {
         try {
             Inflater inflater = new Inflater();
             inflater.setInput(data);
@@ -105,7 +105,7 @@ public class CompressionUtilities {
         deflater.finish();
         byte[] buffer = new byte[1024];
         while (!deflater.finished()) {
-            int count = deflater.deflate(buffer); // returns the generated code... index  
+            int count = deflater.deflate(buffer); // returns the generated code... index
             outputStream.write(buffer, 0, count);
         }
         byte[] output = outputStream.toByteArray();

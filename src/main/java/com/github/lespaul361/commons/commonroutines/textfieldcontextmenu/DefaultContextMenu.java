@@ -26,8 +26,9 @@ import javax.swing.text.JTextComponent;
 import javax.swing.undo.UndoManager;
 
 /**
- *A class that adds a pop up menu with options for undo, redo, cut, copy, paste, 
- * delete, and select all.
+ * A class that adds a pop up menu with options for undo, redo, cut, copy,
+ * paste, delete, and select all.
+ *
  * @author Charles Hamilton
  */
 @SuppressWarnings("serial")
@@ -49,7 +50,7 @@ public class DefaultContextMenu extends JPopupMenu {
     private JTextComponent jTextComponent;
 
     /**
-     *Creates a new instance of <code>DevaultContextMenu</code>
+     * Creates a new instance of <code>DevaultContextMenu</code>
      */
     public DefaultContextMenu() {
         undoManager = new UndoManager();
@@ -198,8 +199,9 @@ public class DefaultContextMenu extends JPopupMenu {
     }
 
     /**
-     * Adds a <code>JTextComponent</code> the class. This lets the pop up menu 
+     * Adds a <code>JTextComponent</code> the class. This lets the pop up menu
      * be added to the component
+     *
      * @param jTextComponent text component to add the context menu to
      */
     public void add(JTextComponent jTextComponent) {
@@ -233,11 +235,11 @@ public class DefaultContextMenu extends JPopupMenu {
 
         jTextComponent.getDocument().addUndoableEditListener(
                 new UndoableEditListener() {
-                    @Override
-                    public void undoableEditHappened(UndoableEditEvent event) {
-                        undoManager.addEdit(event.getEdit());
-                    }
-                });
+            @Override
+            public void undoableEditHappened(UndoableEditEvent event) {
+                undoManager.addEdit(event.getEdit());
+            }
+        });
     }
 
 }

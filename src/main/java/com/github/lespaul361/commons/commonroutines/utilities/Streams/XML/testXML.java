@@ -8,18 +8,18 @@ import java.io.File;
  * and open the template in the editor.
  */
 /**
- * 
+ *
  * @author David Hamilton
  */
 public class testXML {
 
     public static void main(String[] args) {
-	try {
-	    File fle = new File("D:\\EbayUploads\\1524511960094.xml");
-	    com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.XMLStream xmls = new com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.XMLStream(
-		    fle);
-	} catch (Exception e) {
-	}
+        try {
+            File fle = new File("D:\\EbayUploads\\1524511960094.xml");
+            com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.XMLStream xmls = new com.github.lespaul361.commons.commonroutines.utilities.Streams.XML.XMLStream(
+                    fle);
+        } catch (Exception e) {
+        }
 
     }
 }

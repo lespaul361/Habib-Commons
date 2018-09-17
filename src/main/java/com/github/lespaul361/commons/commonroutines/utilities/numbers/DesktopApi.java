@@ -5,7 +5,6 @@
 
 found this code at https://stackoverflow.com/questions/18004150/desktop-api-is-not-supported-on-the-current-platform
  */
-
 package com.github.lespaul361.commons.commonroutines.utilities.numbers;
 
 /**
@@ -19,64 +18,80 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class DesktopApi {
 
     public static boolean browse(URI uri) {
 
-        if (openSystemSpecific(uri.toString())) return true;
+        if (openSystemSpecific(uri.toString())) {
+            return true;
+        }
 
-        if (browseDESKTOP(uri)) return true;
+        if (browseDESKTOP(uri)) {
+            return true;
+        }
 
         return false;
     }
-
 
     public static boolean open(File file) {
 
-        if (openSystemSpecific(file.getPath())) return true;
+        if (openSystemSpecific(file.getPath())) {
+            return true;
+        }
 
-        if (openDESKTOP(file)) return true;
+        if (openDESKTOP(file)) {
+            return true;
+        }
 
         return false;
     }
-
 
     public static boolean edit(File file) {
 
         // you can try something like
         // runCommand("gimp", "%s", file.getPath())
         // based on user preferences.
+        if (openSystemSpecific(file.getPath())) {
+            return true;
+        }
 
-        if (openSystemSpecific(file.getPath())) return true;
-
-        if (editDESKTOP(file)) return true;
+        if (editDESKTOP(file)) {
+            return true;
+        }
 
         return false;
     }
-
 
     private static boolean openSystemSpecific(String what) {
 
         EnumOS os = getOs();
 
         if (os.isLinux()) {
-            if (runCommand("kde-open", "%s", what)) return true;
-            if (runCommand("gnome-open", "%s", what)) return true;
-            if (runCommand("xdg-open", "%s", what)) return true;
+            if (runCommand("kde-open", "%s", what)) {
+                return true;
+            }
+            if (runCommand("gnome-open", "%s", what)) {
+                return true;
+            }
+            if (runCommand("xdg-open", "%s", what)) {
+                return true;
+            }
         }
 
         if (os.isMac()) {
-            if (runCommand("open", "%s", what)) return true;
+            if (runCommand("open", "%s", what)) {
+                return true;
+            }
         }
 
         if (os.isWindows()) {
-            if (runCommand("explorer", "%s", what)) return true;
+            if (runCommand("explorer", "%s", what)) {
+                return true;
+            }
         }
 
         return false;
     }
-
 
     private static boolean browseDESKTOP(URI uri) {
 
@@ -101,7 +116,6 @@ public class DesktopApi {
         }
     }
 
-
     private static boolean openDESKTOP(File file) {
 
         logOut("Trying to use Desktop.getDesktop().open() with " + file.toString());
@@ -124,7 +138,6 @@ public class DesktopApi {
             return false;
         }
     }
-
 
     private static boolean editDESKTOP(File file) {
 
@@ -149,7 +162,6 @@ public class DesktopApi {
         }
     }
 
-
     private static boolean runCommand(String command, String args, String file) {
 
         logOut("Trying to exec:\n   cmd = " + command + "\n   args = " + args + "\n   %s = " + file);
@@ -158,7 +170,9 @@ public class DesktopApi {
 
         try {
             Process p = Runtime.getRuntime().exec(parts);
-            if (p == null) return false;
+            if (p == null) {
+                return false;
+            }
 
             try {
                 int retval = p.exitValue();
@@ -178,7 +192,6 @@ public class DesktopApi {
             return false;
         }
     }
-
 
     private static String[] prepareCommand(String command, String args, String file) {
 
@@ -217,19 +230,16 @@ public class DesktopApi {
             return this == linux || this == solaris;
         }
 
-
         public boolean isMac() {
 
             return this == macos;
         }
-
 
         public boolean isWindows() {
 
             return this == windows;
         }
     }
-
 
     public static EnumOS getOs() {
 

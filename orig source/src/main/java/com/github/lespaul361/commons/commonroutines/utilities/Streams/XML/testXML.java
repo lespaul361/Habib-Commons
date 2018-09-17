@@ -1,6 +1,5 @@
 package com.github.lespaul361.commons.commonroutines.utilities.Streams.XML;
 
-
 import java.io.File;
 
 /*

@@ -8,16 +8,15 @@ package com.github.lespaul361.commons.commonroutines.utilities;
 import java.util.Comparator;
 
 /**
- * 
+ *
  * @author Charles Hamilton
  */
 public class DefaultComparators {
 
     /**
      * Gets a <code>String</code> <code>Comparator</code>
-     * 
-     * @param isCaseSensative
-     *            if case is used to determine sorting
+     *
+     * @param isCaseSensative if case is used to determine sorting
      * @return a <code>String</code> <code>Comparator</code>
      */
     public static Comparator getDefaultStringComparator(boolean isCaseSensative) {
@@ -49,7 +48,7 @@ public class DefaultComparators {
 
     /**
      * Gets a <code>double</code> <code>Comparator</code>
-     * 
+     *
      * @return a <code>double</code> <code>Comparator</code>
      */
     public static Comparator getDefaultDoubleComparator() {
@@ -66,7 +65,7 @@ public class DefaultComparators {
 
     /**
      * Gets a <code>int</code> <code>Comparator</code>
-     * 
+     *
      * @return a <code>int</code> <code>Comparator</code>
      */
     public static Comparator getDefaultIntegerComparator() {

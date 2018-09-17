@@ -13,7 +13,8 @@ package com.github.lespaul361.commons.commonroutines.utilities.Streams.XML;
 public class InvalidHeaderException extends Exception {
 
     /**
-     * Constructs a new <code>Exception thrown when the XML file header is not as expected or incorrect</code>
+     * Constructs a new
+     * <code>Exception thrown when the XML file header is not as expected or incorrect</code>
      *
      * @param string the message to pass to the user
      */
